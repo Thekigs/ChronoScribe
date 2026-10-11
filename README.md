@@ -121,9 +121,9 @@ Detailed score definitions and result provenance are documented in [docs/SCORING
 Python 3.10 or 3.11 is supported. The reference Conda file pins Python 3.10; Python 3.11 can use the same package pins when compatible platform wheels are available.
 
 ~~~bash
-conda env create -f environment.yml
+conda env create -f configs/environment.yml
 conda activate ChronoScribe
-pip install -r requirements.txt
+pip install -r requirements/requirements.txt
 pip install -e .
 ~~~
 
@@ -134,8 +134,8 @@ files because some baseline stacks are intentionally incompatible.
 The main environment covers the Qwen/LoRA controller, Chronos-2, TimesFM, scoring, auditing, and the local API. MOMENT and archival Moirai/Uni2TS use incompatible dependency lines and must be installed separately:
 
 ~~~bash
-pip install -r requirements-moment.txt
-pip install -r requirements-moirai.txt
+pip install -r requirements/moment.txt
+pip install -r requirements/moirai.txt
 ~~~
 
 The reference environment can use CUDA, Apple MPS, or CPU according to the selected runner. Install only the environment required by the workflow you are reproducing.
@@ -149,7 +149,7 @@ The reference environment can use CUDA, Apple MPS, or CPU according to the selec
 | Reference LoRA adapter | `models/checkpoint-7500/` | Full adaptive controller |
 | Raw and registered datasets | `python scripts/download_data.py` plus [docs/REPRODUCIBILITY_STATUS.md](docs/REPRODUCIBILITY_STATUS.md) | Dataset-backed runs |
 | TimesFM, Sundial, Aurora checkpoints | Upstream packages/checkpoints described in [docs/USAGE.md](docs/USAGE.md) | Specialist baselines |
-| MOMENT and Moirai dependencies | `requirements-moment.txt` and `requirements-moirai.txt` | Isolated archival baselines |
+| MOMENT and Moirai dependencies | `requirements/moment.txt` and `requirements/moirai.txt` | Isolated archival baselines |
 
 The model downloader pins the Qwen and Chronos-2 snapshots used by the documented reference setup. It does not download the private LoRA adapter or bypass upstream registration and license requirements. The data downloader exits nonzero when an automatic source fails or produces incomplete output.
 

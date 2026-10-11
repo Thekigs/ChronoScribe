@@ -9,7 +9,7 @@ directory; technical validation does not constitute license clearance.
 
 ## What works from a clean clone
 
-After installing Python 3.10 or 3.11 and `requirements.txt`, these checks require no model weights or raw datasets:
+After installing Python 3.10 or 3.11 and `requirements/requirements.txt`, these checks require no model weights or raw datasets:
 
 ```bash
 python tools/normalize_benchmark_ids.py --benchmark-dir benchmark --check
@@ -26,7 +26,7 @@ The release currently validates 8,120 benchmark records, 460 paired-manifest rec
 - `scripts/download_models.py` pins Qwen3.5-9B to `c202236235762e1c871ad0ccb60c8ee5ba337b9a` and Chronos-2 to `29ec3766d36d6f73f0696f85560a422f50e8498c`; do not replace these revisions when comparing against the documented reference setup.
 - The reference LoRA adapter is not included and has no public download URL in this release. Place a compatible adapter under `models/checkpoint-7500/` before running the adaptive controller. Without it, the full ChronoScribe adaptive runner cannot reproduce the reported controller decisions.
 - `scripts/download_data.py` retrieves permitted public sources, but SWaT and Yahoo S5 require manual registration. Dataset availability and redistribution terms can change by provider.
-- TimesFM, Sundial, and Aurora require their own upstream checkpoints or package downloads. The source release contains the Aurora/Sundial integration code, not their weights. The archival Moirai runner uses `requirements-moirai.txt` because Uni2TS 2.0.0 pins Datasets 2.17.x; it must not be installed into the active Datasets 5.0.1 environment.
+- TimesFM, Sundial, and Aurora require their own upstream checkpoints or package downloads. The source release contains the Aurora/Sundial integration code, not their weights. The archival Moirai runner uses `requirements/moirai.txt` because Uni2TS 2.0.0 pins Datasets 2.17.x; it must not be installed into the active Datasets 5.0.1 environment.
 - Exact paper numbers additionally require the same manifest digest, model revisions, prompt/configuration, framework versions, device, precision, generation settings, and failure policy recorded in the run metadata.
 
 ## Reproduction levels

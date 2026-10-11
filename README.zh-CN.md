@@ -115,9 +115,9 @@ ChronoScribe 围绕五点展开：
 支持 Python 3.10 或 3.11。参考 Conda 文件固定 Python 3.10；使用 Python 3.11 时，需要确认目标平台提供兼容的 wheel，并继续使用同一组依赖版本。
 
 ~~~bash
-conda env create -f environment.yml
+conda env create -f configs/environment.yml
 conda activate ChronoScribe
-pip install -r requirements.txt
+pip install -r requirements/requirements.txt
 pip install -e .
 ~~~
 
@@ -126,8 +126,8 @@ pip install -e .
 主环境覆盖 Qwen/LoRA 控制器、Chronos-2、TimesFM、评分、审计和本地 API。MOMENT 与存档的 Moirai/Uni2TS 使用不兼容的依赖版本，必须分别安装：
 
 ~~~bash
-pip install -r requirements-moment.txt
-pip install -r requirements-moirai.txt
+pip install -r requirements/moment.txt
+pip install -r requirements/moirai.txt
 ~~~
 
 参考环境可根据 runner 配置使用 CUDA、Apple MPS 或 CPU。只安装当前复现实验所需的环境。
@@ -141,7 +141,7 @@ pip install -r requirements-moirai.txt
 | 参考 LoRA adapter | `models/checkpoint-7500/` | 完整自适应控制器 |
 | 原始及需注册的数据集 | `python scripts/download_data.py`，以及[复现状态说明](docs/REPRODUCIBILITY_STATUS.zh-CN.md)中的注册步骤 | 基于数据集的实验 |
 | TimesFM、Sundial、Aurora checkpoint | [docs/USAGE.zh-CN.md](docs/USAGE.zh-CN.md)说明的上游 package/checkpoint | 时序模型基线 |
-| MOMENT 和 Moirai 依赖 | `requirements-moment.txt`、`requirements-moirai.txt` | 隔离的存档基线 |
+| MOMENT 和 Moirai 依赖 | `requirements/moment.txt`、`requirements/moirai.txt` | 隔离的存档基线 |
 
 模型下载器固定文档参考配置使用的 Qwen 和 Chronos-2 snapshot。它不会下载私有 LoRA adapter，也不会绕过上游注册和许可证要求。数据下载器遇到自动来源失败或输出不完整时会以非零状态退出。
 

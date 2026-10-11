@@ -15,15 +15,15 @@ the only workflow that works before model and dataset setup.
 ## Install
 
 ```bash
-conda env create -f environment.yml
+conda env create -f configs/environment.yml
 conda activate ChronoScribe
-pip install -r requirements.txt
+pip install -r requirements/requirements.txt
 pip install -e .
 python scripts/download_models.py
 python scripts/download_data.py
 ```
 
-Use Python 3.10 or 3.11. The reference environment supports the Qwen/LoRA controller, Chronos-2, TimesFM, Sundial, Aurora adapters, scoring, and audits. MOMENT requires `requirements-moment.txt` in a separate environment because its official dependencies conflict with the reference Torch/Transformers versions. The archival Moirai runner requires `requirements-moirai.txt` in a separate environment because Uni2TS 2.0.0 pins Datasets 2.17.x while the active environment uses patched Datasets 5.0.1.
+Use Python 3.10 or 3.11. The reference environment supports the Qwen/LoRA controller, Chronos-2, TimesFM, Sundial, Aurora adapters, scoring, and audits. MOMENT requires `requirements/moment.txt` in a separate environment because its official dependencies conflict with the reference Torch/Transformers versions. The archival Moirai runner requires `requirements/moirai.txt` in a separate environment because Uni2TS 2.0.0 pins Datasets 2.17.x while the active environment uses patched Datasets 5.0.1.
 
 Local Qwen3.5-9B, Chronos-2, and LoRA files are expected under `models/` and are ignored by version control. The downloader does not download the reference LoRA adapter, and it does not bypass registration or separate terms. A clean source checkout can run the validation checks, but the full adaptive benchmark requires the external inputs listed in `REPRODUCIBILITY_STATUS.md`.
 

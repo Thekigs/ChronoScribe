@@ -2,7 +2,7 @@
 #
 # Create a separate environment because momentfm==0.1.4 officially pins
 # transformers==4.33.3 and torch~=2.0, which conflict with the Qwen/Chronos-2
-# reference environment in requirements.txt.
+# reference environment in requirements/requirements.txt.
 torch==2.0.1
 numpy==1.25.2
 scipy==1.11.4

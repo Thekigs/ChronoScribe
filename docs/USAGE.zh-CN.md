@@ -14,15 +14,15 @@
 ## 安装
 
 ```bash
-conda env create -f environment.yml
+conda env create -f configs/environment.yml
 conda activate ChronoScribe
-pip install -r requirements.txt
+pip install -r requirements/requirements.txt
 pip install -e .
 python scripts/download_models.py
 python scripts/download_data.py
 ```
 
-支持 Python 3.10 或 3.11。参考环境包含 Qwen/LoRA 控制器、Chronos-2、TimesFM、Sundial、Aurora adapter、评分和审计工具。下载器不会下载参考 LoRA adapter，也不会绕过数据注册要求。干净源码包可以运行验证检查，但完整 adaptive benchmark 仍需要 `REPRODUCIBILITY_STATUS.zh-CN.md` 中列出的外部输入。MOMENT 的官方依赖与参考 Torch/Transformers 版本冲突，必须在单独环境中使用 `requirements-moment.txt`。存档的 Moirai runner 也必须在单独环境中使用 `requirements-moirai.txt`，因为 Uni2TS 2.0.0 固定 Datasets 2.17.x，而主环境使用已修复路径校验问题的 Datasets 5.0.1。
+支持 Python 3.10 或 3.11。参考环境包含 Qwen/LoRA 控制器、Chronos-2、TimesFM、Sundial、Aurora adapter、评分和审计工具。下载器不会下载参考 LoRA adapter，也不会绕过数据注册要求。干净源码包可以运行验证检查，但完整 adaptive benchmark 仍需要 `REPRODUCIBILITY_STATUS.zh-CN.md` 中列出的外部输入。MOMENT 的官方依赖与参考 Torch/Transformers 版本冲突，必须在单独环境中使用 `requirements/moment.txt`。存档的 Moirai runner 也必须在单独环境中使用 `requirements/moirai.txt`，因为 Uni2TS 2.0.0 固定 Datasets 2.17.x，而主环境使用已修复路径校验问题的 Datasets 5.0.1。
 
 Qwen3.5-9B、Chronos-2 和 LoRA 文件应放在 `models/` 下，并被版本控制忽略。下载器会报告需要注册或单独接受条款的数据源，不会绕过这些要求。
 

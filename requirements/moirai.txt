@@ -1,7 +1,7 @@
 # Isolated archival Moirai/Uni2TS environment.
 #
 # Uni2TS 2.0.0 pins datasets~=2.17.1 and torch<2.5. Keep this file separate
-# from requirements.txt, whose active Chronos workflow uses the patched
+# from requirements/requirements.txt, whose active Chronos workflow uses the patched
 # Datasets 5.0.1 line. Do not install both files into one environment.
 torch==2.4.1
 numpy==1.26.4

@@ -4,9 +4,9 @@
 # against the local Qwen3.5, LoRA, and Chronos-2 imports before release. Its
 # numerical constraints are also compatible with the TimesFM baseline runner.
 # The archival Moirai runner has its own environment in
-# requirements-moirai.txt. Install this file with: pip install -r requirements.txt
+# requirements/moirai.txt. Install this file with: pip install -r requirements/requirements.txt
 #
-# MOMENT intentionally lives in requirements-moment.txt.  Its official
+# MOMENT intentionally lives in requirements/moment.txt.  Its official
 # release pins incompatible Torch and Transformers versions, so combining it
 # with this environment would make pip resolution fail or silently downgrade
 # the Qwen/Chronos-2 reference stack.
@@ -30,7 +30,7 @@ huggingface-hub==1.21.0
 # Data acquisition and benchmark processing.
 # Datasets 5.0.1 retains the load_dataset API used here and includes the
 # current path-validation security fix. The archival Uni2TS/Moirai stack uses
-# Datasets 2.17.x and is isolated in requirements-moirai.txt.
+# Datasets 2.17.x and is isolated in requirements/moirai.txt.
 datasets==5.0.1
 requests==2.34.2
 kagglehub==0.4.3

@@ -6,7 +6,7 @@
 
 ## 干净克隆即可运行的检查
 
-安装 Python 3.10 或 3.11 以及 `requirements.txt` 后，下面的检查不需要模型权重或原始数据：
+安装 Python 3.10 或 3.11 以及 `requirements/requirements.txt` 后，下面的检查不需要模型权重或原始数据：
 
 ```bash
 python tools/normalize_benchmark_ids.py --benchmark-dir benchmark --check
@@ -23,7 +23,7 @@ python -m unittest tests.test_training
 - `scripts/download_models.py` 将 Qwen3.5-9B 固定为 `c202236235762e1c871ad0ccb60c8ee5ba337b9a`，将 Chronos-2 固定为 `29ec3766d36d6f73f0696f85560a422f50e8498c`；与本文档对应的参考实验不要替换这些 revision。
 - 参考 LoRA adapter 不在本发布包中，且没有提供公开下载地址。运行 adaptive controller 前，需要把兼容 adapter 放到 `models/checkpoint-7500/`。没有它，无法复现论文中的完整 ChronoScribe controller 决策。
 - `scripts/download_data.py` 会获取允许下载的公开来源，但 SWaT 和 Yahoo S5 需要手动注册。数据集可用性和再分发条款可能由提供方调整。
-- TimesFM、Sundial 和 Aurora 需要各自的上游 checkpoint 或 package。源码包只包含 Aurora/Sundial 集成代码，不包含权重。存档的 Moirai runner 使用 `requirements-moirai.txt`，因为 Uni2TS 2.0.0 固定 Datasets 2.17.x；不能把它装进主环境的 Datasets 5.0.1 环境。
+- TimesFM、Sundial 和 Aurora 需要各自的上游 checkpoint 或 package。源码包只包含 Aurora/Sundial 集成代码，不包含权重。存档的 Moirai runner 使用 `requirements/moirai.txt`，因为 Uni2TS 2.0.0 固定 Datasets 2.17.x；不能把它装进主环境的 Datasets 5.0.1 环境。
 - 要得到论文中的精确数字，还需要相同的 manifest digest、模型版本、prompt/configuration、框架版本、设备、精度、生成参数和失败策略。
 
 ## 复现等级

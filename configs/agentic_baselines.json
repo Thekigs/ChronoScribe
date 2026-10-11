@@ -1,0 +1,43 @@
+{
+  "purpose": "LLM-assisted and agentic forecasting comparisons requested by the review",
+  "official_profiles": "configs/official_agent_profiles.json",
+  "shared_protocol": {
+    "manifest": "benchmark/evaluation_manifest.json",
+    "forecast_metrics": ["MAE", "RMSE", "sMAPE", "MASE", "WAPE", "Direction_Accuracy"],
+    "primary_backbones": ["chronos2", "timesfm"],
+    "device": "mps",
+    "no_future_values_during_execution": true,
+    "report_tls_only_when_full_response_protocol_is_shared": true
+  },
+  "baselines": {
+    "simple_fusion": {
+      "kind": "controlled_adaptation",
+      "description": "Fixed context TSFM forecast with the same Qwen response path, without adaptive routing or revision.",
+      "entrypoint": "tools/run_agentic_baselines.py --baseline simple_fusion"
+    },
+    "chronosteer_style": {
+      "kind": "controlled_adaptation",
+      "description": "LLM emits bounded forecast-revision instructions applied to the same TSFM backbone.",
+      "entrypoint": "tools/run_agentic_baselines.py --baseline revision_control",
+      "official_status": "Same-manifest mechanism control only; never label as official ChronoSteer. The official checkpoint reproduction is recorded separately on MTSFBench-300."
+    },
+    "chronosteer_official": {
+      "kind": "official_reproduction",
+      "description": "Official ChronoSteer repository/checkpoint on the released MTSFBench-300 text-event protocol; report as an external reference, not a current-manifest paired rank.",
+      "entrypoint": "tools/run_agentic_baselines.py --baseline external --external-status official_reproduction",
+      "requires_explicit_official_code_and_checkpoint": true
+    },
+    "timeseriesscientist_official": {
+      "kind": "official_reproduction",
+      "description": "Official TimeSeriesScientist workflow on the common forecasting subset.",
+      "entrypoint": "tools/run_agentic_baselines.py --baseline external --external-status official_reproduction",
+      "requires_explicit_official_code_and_checkpoint": true
+    },
+    "last_mile_adapted": {
+      "kind": "controlled_adaptation",
+      "description": "Last-mile-style contextual revision only when matching event/context inputs are available.",
+      "entrypoint": "tools/run_agentic_baselines.py --baseline external --external-status controlled_adaptation"
+    }
+  },
+  "result_labels": ["official_reproduction", "controlled_adaptation", "qualitative_only"]
+}

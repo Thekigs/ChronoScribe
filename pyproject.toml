@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chronoscribe"
+version = "0.1.0"
+description = "Grounded time-series forecasting from natural-language instructions"
+readme = "README.md"
+requires-python = ">=3.10,<3.12"
+license = { file = "LICENSE" }
+authors = [
+  { name = "ChronoScribe Contributors" },
+]
+keywords = ["time-series", "forecasting", "language-models", "reproducibility"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+]
+
+[tool.setuptools]
+include-package-data = true
+packages = [
+  "agent_baselines",
+  "chronoscribe",
+  "models",
+  "models.aurora",
+  "scoring",
+  "training",
+  "utils",
+]
+
+[tool.setuptools.package-data]
+models = [
+  "aurora/**/*.json",
+  "aurora/**/*.txt",
+  "sundial-base-128m/*.py",
+  "sundial-base-128m/*.json",
+]
+
+# The model runners intentionally keep their environment definitions in the
+# requirements*.txt files.  Those files contain incompatible specialist
+# stacks, so duplicating them as package metadata would make installation less
+# reproducible.  `pip install -e .` installs the reusable source packages;
+# install the documented requirements file for the workflow being reproduced.

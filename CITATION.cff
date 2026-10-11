@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use ChronoScribe, please cite this software."
+title: "ChronoScribe: Grounded Time Series Forecasting from Natural-Language Instructions"
+type: software
+authors:
+  - name: ChronoScribe Contributors
+abstract: "A semantic--numerical specialization framework for natural-language time series forecasting with forecast-grounded responses."
+license: MIT

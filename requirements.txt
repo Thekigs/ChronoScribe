@@ -1,0 +1,49 @@
+# ChronoScribe reference environment
+#
+# Python 3.10 or 3.11 is required. The reference stack below was verified
+# against the local Qwen3.5, LoRA, and Chronos-2 imports before release. Its
+# numerical constraints are also compatible with the TimesFM baseline runner.
+# The archival Moirai runner has its own environment in
+# requirements-moirai.txt. Install this file with: pip install -r requirements.txt
+#
+# MOMENT intentionally lives in requirements-moment.txt.  Its official
+# release pins incompatible Torch and Transformers versions, so combining it
+# with this environment would make pip resolution fail or silently downgrade
+# the Qwen/Chronos-2 reference stack.
+
+# Shared numerical runtime for the active Chronos-2 and Qwen workflows.
+torch==2.4.1
+torchvision==0.19.1
+numpy==1.26.4
+scipy==1.11.4
+pandas==2.1.4
+
+# Language controller and reference forecasting specialist.
+transformers==5.12.1
+peft==0.19.1
+accelerate==1.14.0
+chronos-forecasting==2.3.0
+safetensors==0.8.0
+einops==0.7.0
+huggingface-hub==1.21.0
+
+# Data acquisition and benchmark processing.
+# Datasets 5.0.1 retains the load_dataset API used here and includes the
+# current path-validation security fix. The archival Uni2TS/Moirai stack uses
+# Datasets 2.17.x and is isolated in requirements-moirai.txt.
+datasets==5.0.1
+requests==2.34.2
+kagglehub==0.4.3
+
+# Metrics and scoring.
+rouge-score==0.1.2
+nltk==3.9.4
+bert-score==0.3.12
+
+# OpenAI-compatible local service.
+fastapi==0.139.0
+pydantic==2.13.4
+uvicorn[standard]==0.51.0
+
+# TimesFM is compatible with the active reference stack.
+timesfm[torch]==2.0.2

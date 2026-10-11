@@ -1,0 +1,15 @@
+# Isolated MOMENT baseline environment.
+#
+# Create a separate environment because momentfm==0.1.4 officially pins
+# transformers==4.33.3 and torch~=2.0, which conflict with the Qwen/Chronos-2
+# reference environment in requirements.txt.
+torch==2.0.1
+numpy==1.25.2
+scipy==1.11.4
+pandas==2.1.4
+transformers==4.33.3
+huggingface-hub==0.24.0
+momentfm==0.1.4
+rouge-score==0.1.2
+nltk==3.9.4
+bert-score==0.3.13

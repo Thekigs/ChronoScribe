@@ -1,0 +1,30 @@
+{
+  "description": "Sanitized reference configuration extracted from the local ChronoScribe language-controller training setup. It contains no private paths or dataset records.",
+  "base_model": "Qwen/Qwen3.5-9B",
+  "adaptation_method": "LoRA",
+  "learning_rate": 0.0002,
+  "num_train_epochs": 2,
+  "per_device_train_batch_size": 2,
+  "per_device_eval_batch_size": 2,
+  "gradient_accumulation_steps": 16,
+  "optimizer": "adamw_torch",
+  "learning_rate_schedule": "cosine",
+  "warmup_ratio": 0.05,
+  "weight_decay": 0.01,
+  "seed": 42,
+  "data_seed": 42,
+  "bf16": true,
+  "gradient_checkpointing": true,
+  "evaluation_strategy": "steps",
+  "evaluation_steps": 500,
+  "logging_steps": 50,
+  "save_strategy": "steps",
+  "save_steps": 1000,
+  "required_release_metadata": [
+    "training-data provenance and license",
+    "record counts and train-validation split",
+    "directive and response prompt templates",
+    "LoRA rank, alpha, dropout, and target modules",
+    "response-target construction procedure"
+  ]
+}

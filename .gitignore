@@ -1,0 +1,46 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+
+# Raw/local datasets (download with download_data.py)
+data/*
+!data/README.md
+!data/README.zh-CN.md
+
+# Model weights, adapters, caches, and checkpoints
+models/**/*.safetensors
+models/**/*.pt
+models/**/*.bin
+models/**/*.ckpt
+models/**/.cache/
+models/**/__pycache__/
+models/Qwen3.5-9B/
+models/checkpoint-7500/
+models/chronos-2/
+
+# Generated experiment artifacts
+results/
+scores/
+**/__pycache__/
+*.pyc
+*.pyo
+*.log
+*.aux
+*.blg
+*.fdb_latexmk
+*.fls
+*.bak
+*.orig
+.DS_Store
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+
+# Local paper submission bundle and compiled outputs
+docs/AuthorKit27/
+*.pdf

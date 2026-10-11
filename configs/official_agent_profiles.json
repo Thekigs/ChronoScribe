@@ -1,0 +1,27 @@
+{
+  "chronosteer": {
+    "paper": "https://arxiv.org/abs/2505.10083",
+    "dataset": "https://huggingface.co/datasets/ChengsenWang/ChronoSteer-100K",
+    "official_repository": "https://github.com/ForestsKing/ChronoSteer",
+    "core_operation": "LLM-generated textual event revision instructions steer a TSFM forecast",
+    "required_inputs": ["historical_series", "text_event_or_revision_context"],
+    "numeric_comparison": "Official MTSFBench-300 result is an external reference; same-manifest numeric ranking requires equivalent pre-forecast text-event inputs, otherwise use controlled_adaptation",
+    "priority": "P0"
+  },
+  "timeseriesscientist": {
+    "paper": "https://arxiv.org/abs/2510.01538",
+    "official_repository": "https://github.com/Y-Research-SBU/TimeSeriesScientist",
+    "core_operation": "Curator, Planner, Forecaster, and Reporter agents coordinate diagnosis, model selection, forecasting, and reporting",
+    "required_inputs": ["historical_series", "forecast_horizon", "agent_runtime_dependencies"],
+    "numeric_comparison": "Forecasting subset first; full semantic dimensions only if the output contract is made identical",
+    "priority": "P0"
+  },
+  "last_mile": {
+    "paper": "https://arxiv.org/abs/2606.02497",
+    "official_repository": null,
+    "core_operation": "Context retrieval, memory, tools, and explicit forecast revision over a forecasting backbone",
+    "required_inputs": ["historical_series", "business_or_event_context", "retrieval_or_memory_backend"],
+    "numeric_comparison": "Only on a matched contextual subset; otherwise qualitative_only",
+    "priority": "P1"
+  }
+}

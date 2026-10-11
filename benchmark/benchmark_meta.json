@@ -1,0 +1,69 @@
+{
+  "benchmark_name": "ChronoScribe Evaluation Suite",
+  "description": "A 23-dimension evaluation suite for instruction-driven time series forecasting systems. Dimensions are organized into five capability groups: forecasting, temporal reasoning, instruction following, uncertainty, and efficiency. The suite combines public time series sources and task-specific instruction templates across energy, transportation, weather, finance, healthcare, retail, and monitoring domains.",
+  "total_samples": 8120,
+  "num_dimensions": 23,
+  "paired_evaluation": {
+    "manifest": "evaluation_manifest.json",
+    "selected_samples": 460,
+    "selection_rule": "20 samples per dimension using seed 2026",
+    "purpose": "All compared systems, ablations, and baselines must use the same selected sample identifiers."
+  },
+  "components": {
+    "F_Forecasting": {
+      "weight": "60%",
+      "dimensions": ["D1_short_term_forecasting", "D2_long_horizon", "D3_multivariate", "D4_zero_shot", "D5_few_shot", "D9_robustness", "D14_solar", "D17_missing_robustness", "D20_horizon_degradation", "D22_outlier_robustness"],
+      "key_metrics": ["sMAPE", "MASE", "RMSE", "Direction_Accuracy", "Peak_Recall", "Peak_Precision"]
+    },
+    "R_Reasoning": {
+      "weight": "15%",
+      "dimensions": ["D6_trend_judgment", "D7_anomaly_reasoning", "D8_periodicity", "D13_causal_reasoning", "D15_uea_classification", "D19_multivar_attribution"],
+      "key_metrics": ["Accuracy", "ROUGE-L", "Trend_Word_Overlap"]
+    },
+    "I_Instruction_Following": {
+      "weight": "15%",
+      "dimensions": ["D11_instruction_following", "D12_multi_turn", "D16_agent_capability", "D21_comprehensive_score", "D23_multi_turn_conversation"],
+      "key_metrics": ["JSON_Validity", "Field_Completeness", "Workflow_Instruction_Accuracy"]
+    },
+    "U_Uncertainty": {
+      "weight": "5%",
+      "dimensions": ["D10_uncertainty"],
+      "key_metrics": ["Coverage", "CRPS", "Calibration_Error"]
+    },
+    "E_Efficiency": {
+      "weight": "5%",
+      "dimensions": ["D18_efficiency"],
+      "key_metrics": ["Latency", "Tokens_per_Second", "GPU_Memory"]
+    }
+  },
+  "dimensions": {
+    "D1_short_term_forecasting": {"samples": 1340, "description": "Multi-domain short-horizon forecasting across 9 datasets with horizons of 24–96 steps", "datasets": ["ETTh1", "ETTh2", "ETTm1", "ETTm2", "electricity", "traffic", "weather", "exchange_rate", "illness", "M5"]},
+    "D2_long_horizon": {"samples": 2400, "description": "Long-horizon forecasting up to 720 steps, testing degradation under extended prediction windows", "datasets": ["ETTh1", "ETTh2", "ETTm1", "ETTm2", "electricity", "traffic", "weather", "exchange_rate"]},
+    "D3_multivariate": {"samples": 450, "description": "Simultaneous multi-channel prediction requiring joint modeling of correlated time series", "datasets": ["ETTh1", "ETTh2", "weather", "traffic"]},
+    "D4_zero_shot": {"samples": 120, "description": "Cross-domain zero-shot transfer: model trained on source domain, tested on unseen target domain", "datasets": ["ETTh1→Exchange", "Weather→Illness", "Traffic→ETT", "Finance→Energy"]},
+    "D5_few_shot": {"samples": 100, "description": "Few-shot learning with 5%–100% training data availability, measuring data efficiency", "datasets": ["ETTh1", "ETTh2", "ETTm1", "ETTm2", "electricity", "traffic", "weather", "exchange_rate", "illness"]},
+    "D6_trend_judgment": {"samples": 200, "description": "Binary and multi-class trend direction assessment (rising/falling/stable) with calibrated thresholds", "datasets": ["ETTh1", "ETTh2", "ETTm1", "ETTm2", "weather", "electricity", "traffic"]},
+    "D7_anomaly_reasoning": {"samples": 230, "description": "Anomaly detection and type classification (spike, level shift, trend break, noise burst) with root cause analysis", "datasets": ["NAB", "MSL", "SMAP", "SMD", "PSM", "SWaT"]},
+    "D8_periodicity": {"samples": 200, "description": "Periodicity identification: detecting cycle lengths and verifying estimated periods against ground truth", "datasets": ["ETTh1", "ETTh2", "ETTm1", "ETTm2", "electricity", "traffic", "weather"]},
+    "D9_robustness": {"samples": 350, "description": "Robustness to perturbations: missing values, noise injection, and distribution shifts", "datasets": ["ETTh1", "ETTh2", "ETTm1", "ETTm2", "electricity", "traffic", "weather", "exchange_rate"]},
+    "D10_uncertainty": {"samples": 200, "description": "Uncertainty quantification via P10/P50/P90 prediction intervals with coverage and calibration metrics", "datasets": ["ETTh1", "ETTh2", "weather", "exchange_rate", "electricity"]},
+    "D11_instruction_following": {"samples": 200, "description": "Strict JSON format compliance, field completeness, and extra-field detection under varied instruction formats", "datasets": ["ETTh1", "ETTh2", "weather", "exchange_rate", "illness", "electricity"]},
+    "D12_multi_turn": {"samples": 150, "description": "Multi-turn dialogue with iterative prediction refinement, clarification, and follow-up analysis", "datasets": ["ETTh1", "electricity", "traffic", "weather", "illness"]},
+    "D13_causal_reasoning": {"samples": 150, "description": "Causal attribution: identifying primary and secondary drivers (holiday, weather, policy, seasonal) of observed patterns", "datasets": ["ETTh1", "ETTh2", "electricity", "traffic", "illness", "exchange_rate"]},
+    "D14_solar": {"samples": 120, "description": "Renewable energy forecasting: solar plant output and hydroelectric generation with zero-inflated diurnal patterns", "datasets": ["solar", "hydro"]},
+    "D15_uea_classification": {"samples": 510, "description": "Time series classification across UEA/UCR/MONSTER benchmarks: gesture, activity, sensor, and medical signals", "datasets": ["UEA", "UCR", "MONSTER"]},
+    "D16_agent_capability": {"samples": 144, "description": "Autonomous agent workflow: multi-step planning, tool orchestration, and dependency-aware task decomposition", "datasets": ["ETTh1", "ETTh2", "weather", "electricity", "traffic"]},
+    "D17_missing_robustness": {"samples": 176, "description": "Robustness under progressive data missingness (10%–90%), measuring degradation slope and recovery behavior", "datasets": ["ETTh1", "ETTh2", "electricity", "traffic", "weather", "exchange_rate"]},
+    "D18_efficiency": {"samples": 247, "description": "Inference efficiency benchmarking: latency, throughput, GPU memory, and token budget compliance across varying load", "datasets": ["ETTh1", "ETTh2", "ETTm1", "ETTm2", "electricity", "weather", "traffic", "exchange_rate"]},
+    "D19_multivar_attribution": {"samples": 112, "description": "Multi-variable attribution: ranking input channels by predictive contribution and detecting spurious correlations", "datasets": ["ETTh1", "ETTh2", "weather", "electricity"]},
+    "D20_horizon_degradation": {"samples": 227, "description": "Systematic horizon degradation analysis: sMAPE growth rate as prediction length increases from 12 to 336 steps", "datasets": ["ETTh1", "ETTh2", "ETTm1", "ETTm2", "electricity", "traffic", "weather"]},
+    "D21_comprehensive_score": {"samples": 150, "description": "End-to-end comprehensive assessment combining prediction accuracy, reasoning depth, and explanation quality", "datasets": ["ETTh1", "ETTh2", "ETTm1", "ETTm2", "electricity", "traffic", "weather", "exchange_rate", "illness"]},
+    "D22_outlier_robustness": {"samples": 168, "description": "Robustness to extreme outliers: NAB benchmark perturbations with error increase, recovery time, and stability scoring", "datasets": ["NAB", "Yahoo S5"]},
+    "D23_multi_turn_conversation": {"samples": 176, "description": "Extended multi-turn conversational forecasting with consistency tracking across 4+ follow-up turns", "datasets": ["electricity", "traffic", "weather", "ETTh1", "ETTh2"]}
+  },
+  "scoring_formula": "TLS = 0.60×F + 0.15×R + 0.15×I + 0.05×U + 0.05×E",
+  "data_sources": "ETT (4 variants) / Electricity / Traffic / Weather / Exchange Rate / Illness / M5 Retail / Solar / NAB / UEA / UCR / MONSTER / MSL / SMAP / SMD / PSM / SWaT / Yahoo S5",
+  "id_format": "<dimension>__<source-file>__<row-number>__<legacy-id>",
+  "release_note": "The full suite contains 8,120 source instances. Reported paired evaluations use the fixed manifest unless a paper explicitly states another manifest.",
+  "generated_at": "2026-07-16"
+}

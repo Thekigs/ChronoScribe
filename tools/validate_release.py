@@ -40,8 +40,10 @@ def main() -> None:
         if ".git" in path.parts or path.name.endswith(".zh-CN.md"):
             continue
         markdown.append(path)
-        companion = path.with_name(path.stem + ".zh-CN.md")
-        if not companion.exists():
+        companions = [path.with_name(path.stem + ".zh-CN.md")]
+        if path.parent == ROOT:
+            companions.append(ROOT / "docs" / f"{path.stem}.zh-CN.md")
+        if not any(companion.exists() for companion in companions):
             missing_companions.append(str(path.relative_to(ROOT)))
     if missing_companions:
         raise ValueError("missing Chinese Markdown companions: " + ", ".join(missing_companions))
